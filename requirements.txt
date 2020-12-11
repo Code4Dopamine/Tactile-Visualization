@@ -1,2 +1,5 @@
 websocket-client
 python-osc
+PyQt5
+numpy
+matplotlib
