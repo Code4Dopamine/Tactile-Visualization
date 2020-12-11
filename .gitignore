@@ -42,3 +42,5 @@ Thumbs.db
 /.idea
 /setting-venv
 /CSVData/Archive
+/venv
+/.vscode
