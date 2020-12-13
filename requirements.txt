@@ -3,3 +3,4 @@ python-osc
 PyQt5
 numpy
 matplotlib
+opencv-python

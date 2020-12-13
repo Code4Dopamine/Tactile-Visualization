@@ -44,3 +44,5 @@ Thumbs.db
 /CSVData/Archive
 /venv
 /.vscode
+codeTest.py
+codeTest.ipynb

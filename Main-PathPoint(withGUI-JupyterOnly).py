@@ -6,9 +6,7 @@ from bhaptics import haptic_player
 from time import sleep
 
 pathPointList = []
-countryPathPointCoordDic = {}       # For use in PathPoint (bHaptic Json)
-# Example Output: {'USA': [156, 552], 'ZAF': [340, 301], 'JPN': [167, 71]}
-coord_Dic = {}
+countryCoordinateDic = {}
 # tempList = [("USA", 160, 539), ("JPN", 185, 306), ("BRA", 315, 260)]
 countryList = ["USA", "ZAF", "JPN"]
 sampleData = ['USA', '2020-01-23', '0']
@@ -16,8 +14,7 @@ maxCountryCases = {}  # USA, JPN, ZAF
 
 # imageSize = [480, 699] #world2.jpg
 imageSize = [550, 800] #world3.jpg
-imageDir = "CSVData/world3.jpg"
-imageDir_CV = "CSVData/world3+haptic.jpg"
+
 
 # ======= Main Data & Parameters =======
 CoVID_Data = {}
@@ -107,31 +104,28 @@ def initializeCovidWorldData():
 
 
 def addCountryXY_hapticSuit(name, x, y):
-    newX = round(x / imageSize[0], 3)   # Round to 3 Decimals
+    newX = round(x / imageSize[0], 3)
     newY = round(y / imageSize[1], 3)
 
     d = {str(name): [newX, newY]}
     # print(f'{d} -- Type:{type(d)}')
-    countryPathPointCoordDic.update(d)
+    countryCoordinateDic.update(d)
 
-def addCountryXY(name, x, y):
-    d = {str(name): [x, y]}
-    # print(f'{d} -- Type:{type(d)}')
-    coord_Dic.update(d)
 
 def runCV2():
-    # TODO: Add "mode" argument for image switch when performing test? (imageDir_CV)
+    # import cv2
+    # import numpy as np
 
     # Picture path
-    img = cv2.imread(imageDir)
-    coordXY_Tuple = []
+    img = cv2.imread("CSVData/world2.jpg")
+    a = []
     b = []
 
     def on_EVENT_LBUTTONDOWN(event, x, y, flags, param):
         if event == cv2.EVENT_LBUTTONDOWN:
             xy = "%d,%d" % (x, y)
             coordinate = (x, y)
-            coordXY_Tuple.append(coordinate)
+            a.append(coordinate)
             # b.append(y)
             cv2.circle(img, (x, y), 1, (0, 0, 255), thickness=-1)
             cv2.putText(img, xy, (x, y), cv2.FONT_HERSHEY_PLAIN,
@@ -139,7 +133,7 @@ def runCV2():
             cv2.imshow("image", img)
             print(x, y)
 
-    cv2.putText(img, f"Pick Coordinate USA, South_Africa,and Japan in Order", tuple(imageSize), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+    cv2.putText(img, f"Pick Coordinate USA, South_Africa,and Japan in Order", (0, 690), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                 (0, 0, 0), thickness=1)
     cv2.namedWindow("image")
     cv2.setMouseCallback("image", on_EVENT_LBUTTONDOWN)
@@ -149,32 +143,16 @@ def runCV2():
     # print(f'CV2-Coordinate:{a}')
 
     for i, country in enumerate(countryList):
-        addCountryXY_hapticSuit(country, coordXY_Tuple[i][0], coordXY_Tuple[i][1])
-        addCountryXY(country, coordXY_Tuple[i][0], coordXY_Tuple[i][1])
+        addCountryXY_hapticSuit(country, a[i][0], a[i][1])
 
 
 # for item in tempList:
 #     print(item)
 #     addCountry(item[0] ,item[1] ,item[2])
-# def genPercValueGUI(mode, ):
-#     if mode in countryList:
-#         value = round(intensity * 100 / maxCountryCases[mode])
-#         if value > 100:
-#             value = 100
-#         d = {"x": x, "y": y, "intensity": value}
-#         return d
-#     elif mode == 0:
-#         value = round(intensity * 100 / maxCountryCases[country])
-#
-#         d = {"x": x, "y": y, "intensity": value}
-#         return d
-#     else:
-#         print("Error: Use \"USA, JPN, ZAF, 0\"")
-
 
 def genPathPoint(country, intensity, mode):
-    x = countryPathPointCoordDic[country][0]
-    y = countryPathPointCoordDic[country][1]
+    x = countryCoordinateDic[country][0]
+    y = countryCoordinateDic[country][1]
     # value = 0
 
     if mode in countryList:
@@ -199,7 +177,7 @@ def main(mode):  # 0 = default(respective), "CountryISO" = setCountryMax as MaxI
     # print(f'Test[{len()}]: {}')
     runCV2()
     initializeCovidWorldData()
-    print(f'countryPathPointCoordDic ={countryPathPointCoordDic}')
+    print(f'CountryCoordinateDic ={countryCoordinateDic}')
     print(f'COVIDData[{len(CoVID_Data.keys())}]: {CoVID_Data}')
     print("MaxCountryCases=", maxCountryCases)
 
@@ -216,13 +194,11 @@ def main(mode):  # 0 = default(respective), "CountryISO" = setCountryMax as MaxI
             sleep(wait)
 
     # ================== Visualization CODE (matplotlib)===================
-        # FIXME: Issue with running in .py environment
-        # ----> See "Main-PathPoint(withGUI-JupyterOnly)" File for GUI Run
-    # def initGUIMatPlotlib():
-    #     import matplotlib.pyplot as plt
-    #     fig, ax = plt.subplots(figsize=(6, 9))
-    #     img = plt.imread(imageDir)
-    #     ax.imshow(img)
+    def initGUIMatPlotlib():
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots(figsize=(6, 9))
+        img = plt.imread("CSVData\world3.jpg")
+        ax.imshow(img)
 
     # ================== Main CODE Run===================
     player = haptic_player.HapticPlayer()
