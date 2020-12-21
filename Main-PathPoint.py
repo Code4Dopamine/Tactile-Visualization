@@ -18,6 +18,7 @@ maxCountryCases = {}  # USA, JPN, ZAF
 imageSize = [550, 800] #world3.jpg
 imageDir = "CSVData/world3.jpg"
 imageDir_CV = "CSVData/world3+haptic.jpg"
+imageDir_CV = "CSVData/world3+haptic.jpg"
 
 # ======= Main Data & Parameters =======
 CoVID_Data = {}
@@ -32,6 +33,7 @@ dateList = []
 intensityList = {"USA": [], "ZAF": [], "JPN": []}
 
 displayText = ""
+
 
 
 def initializeCovidWorldData():
@@ -191,6 +193,17 @@ def genPathPoint(country, intensity, mode):
     else:
         print("Error: Use \"USA, JPN, ZAF, 0\"")
 
+def genIntensity(intensity, mode):
+    if mode in countryList:
+        value = round(intensity * 100 / maxCountryCases[mode])
+        if value > 100:
+            value = 100
+        return value
+    elif mode == 0:
+        value = round(intensity * 100 / maxCountryCases[country])
+        return value
+    else:
+        print("Error: Use \"USA, JPN, ZAF, 0\"")
 
 def main(mode):  # 0 = default(respective), "CountryISO" = setCountryMax as MaxIntensity
     global wait, millis
@@ -249,7 +262,8 @@ def main(mode):  # 0 = default(respective), "CountryISO" = setCountryMax as MaxI
 
         global displayText
         newlist = [""]
-        displayText = (f"#{i}| Date:{date}| data={country_data} | percentage={countryPercentDisplay} \n")
+        # displayText = (f"#{i}| Date:{date}| data={country_data} | percentage={countryPercentDisplay} \n")
+        displayText = (f"#{i}| Date:{date}")
         print(displayText)
         # window['output'].update(f"Date: {date}| DailyCases:{country_data}")
         # window.Refresh()
@@ -264,3 +278,13 @@ def main(mode):  # 0 = default(respective), "CountryISO" = setCountryMax as MaxI
 
 # main("JPN")
 main(0)
+
+#
+# def test():
+#         pathPoint = [{"x": 0.5, "y": 0.5, "intensity": 100}]
+#         for i in range(5):
+#             # player.submit_path("backFrame", "VestBack", pathPoint, millis)
+#             player.submit_dot()
+#             sleep(wait)
+#
+# test()

@@ -1,5 +1,6 @@
 from time import sleep
 from bhaptics import haptic_player
+from threading import Thread
 
 
 player = haptic_player.HapticPlayer()
@@ -25,9 +26,11 @@ durationMillis = 100
 for i in range(20):
     print(i, "back")
     player.submit_dot("backFrame", "VestBack", [{"index": i, "intensity": 100}], durationMillis)
-    sleep(interval)
-
-    print(i, "front")
     player.submit_dot("frontFrame", "VestFront", [{"index": i, "intensity": 100}], durationMillis)
     sleep(interval)
 
+    # print(i, "front")
+    # player.submit_dot("frontFrame", "VestFront", [{"index": i, "intensity": 100}], durationMillis)
+    # sleep(interval)
+
+# t1 = Thread(target=player.submit_, args=())
