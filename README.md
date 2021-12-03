@@ -1,15 +1,15 @@
 # Tactile-Visualization
 
-Master's Research & Thesis on Haptic Design and Data Visualization.
+Master's Research & Thesis on Haptic Design and Data Visualization.  
 Explores the concept of using new "mediums" of Data Interpretation and Visualization in the form of Tactile Response.
 
 <p align=center>
-    <img src="showcase-example/User-Example.jpg" width="360">
+    <img src="showcase-example/User-Example.jpg" width=360px>
 </p>
 
 Showcase Demo
 <p align=center>
-    <img src="showcase-example\showcase-example/Demo-Example.gif">
+    <img src="showcase-example/Demo-Example.gif">
 </p>
 <br>
 <br>
@@ -23,10 +23,14 @@ Large dataset is obtained online and stored into the sqlite .db for quick readin
 
 
 ## User Interface (with Tactile Suit Visualizer for Debugging)
-<img src="showcase-example/Tactile-Visualization_Overview.png">
-
+<p align=center>
+    <img src="showcase-example/Tactile-Visualization_Overview.png" width=720px>
+</p>
+    
 ## Components of how it works
-<img src="showcase-example/UML-Overview.png">
+<p align=center>
+    <img src="showcase-example/UML-Overview.png" width=720px>
+</p>
 
 Haptic Suit and software used in this demo:
 - B-Haptic Tactoc Suit
@@ -44,15 +48,9 @@ Under this format, data is being displayed similar to "audio" file in temporal p
 
 ## Dot-Point Mode (Inital Testing) of parsing data and output with Intensity based on Highest % of data value within the set
 
-<img src="showcase-example\showcase-example\Dot-Point-Mode.gif">
+<img src="showcase-example\Dot-Point-Mode.gif">
 
 ---
-# Video Demo of All Components
-
-<video width="320" height="240" controls>
-  <source src="showcase-example\Full-Demo (Speed x16).mp4" type="video/mp4">
-</video>
-
 
 <!-- 
 ---
