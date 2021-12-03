@@ -225,7 +225,8 @@ def intensityToInteger(intensityKey):
     #     print('headerValueToInteger NOT type STR')
 
 def getMode4Level(value): # Returns 0-4 based on level for ""
-    table = [20,40,60,80,100]
+    # table = [20,40,60,80,100]
+    table = [0,20,40,60,80]
     for i, option in enumerate(table):
         # print(value, " > ", i)
         if value >= 101:
@@ -366,11 +367,11 @@ def main():
     sleep(2)
     print("========= Haptic Player Activated ==========")
     wait = 0.22
-    mode = 20  # 20 or 4
+    mode = 4  # 20 or 4
     millis = 220
 
     global csvParseCounter
-    csvParseCounter = 300
+    csvParseCounter = 150
 # =============== End Initialize ===============
 
     pathPoint = [{"x": 0.5, "y": 0.5, "intensity": 100}]
@@ -381,12 +382,13 @@ def main():
         player.submit_path("backFrame", "VestBack", pathPoint, millis)
         sleep(0.3)
 
-    while csvParseCounter < csvDictSize:
+    while csvParseCounter < csvDictSize-1:
 
         # updateDotPointList(csvDict["intensity"], maxIntensityValue, mode)
         updateDotPointList(mode)
         # print("Counter =", csvParseCounter)
-        print(f'#{csvParseCounter} | Date = {dateList[csvParseCounter-1]} | Cases = {csvDict["intensity"][csvParseCounter-1]}')
+        # print(f'#{csvParseCounter} | Date = {dateList[csvParseCounter-1]} | Cases = {csvDict["intensity"][csvParseCounter-1]}')
+        print(f'#{csvParseCounter} | Date = {dateList[csvParseCounter]} | Cases = {csvDict["intensity"][csvParseCounter]}')
 
         # dotPointList.reverse()
         # TODO: Dictionary Value Reverse
