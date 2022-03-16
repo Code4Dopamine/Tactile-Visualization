@@ -17,7 +17,8 @@ Showcase Demo
 ---
 
 # How it works
-Large dataset is obtained online and stored into the sqlite .db for quick reading and analyzing. Data can then be sent both for:
+Large dataset is obtained online and stored into the sqlite .db for quick reading and analyzing. 
+Data can then be sent and display in 2 modes:
 1. Data Visualization via `matplotlib`
 2. Haptic/Tactile Data Visualization (via Full Body Tactile Suit)
 
